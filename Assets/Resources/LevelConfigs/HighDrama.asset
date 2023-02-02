@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099410705cbfe354bb4f89ecc023c6f6, type: 3}
+  m_Name: HighDrama
+  m_EditorClassIdentifier: 
+  timeKeysJson: '{"timeKeysMilliseconds":[0,479,1184,1631,2223,2799,3568,4127,4831,5199,5696,6368,6992,7664,8000,8463,9071,9696,10336,10640,11135,11807,12447,13055,13472,13951,14512,15135,15744,16496,17184,17871,18559,19312,20031,20687,21327,22031,22704,23360,24016,24832,25535,26159,26784,27488,28176,28864,29488,30256,30944,31663]}'
+  clip: {fileID: 8300000, guid: ea5e86179feac3349ae36e2642028090, type: 3}
+  icon: {fileID: 0}
+  fallSpeed: 10
+  randomObjects:
+  - {fileID: 5792710284026368, guid: 72b31ce3a259581498e1ba64f0c8d7ff, type: 3}
+  randomObstacles:
+  - {fileID: 5792710284026368, guid: f182d3c83fa092f429d55b9f115f9bb5, type: 3}
+  obstacleChance: 10

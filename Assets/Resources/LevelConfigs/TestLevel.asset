@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099410705cbfe354bb4f89ecc023c6f6, type: 3}
+  m_Name: TestLevel
+  m_EditorClassIdentifier: 
+  timeKeysJson: '{"timeKeysMilliseconds":[5,837,1842,2750,6576,7013,7770,8577,12570,13104,13859,14524,18563,19107,19730,20645,24648,25291,25946,26644,30385,31144,31894,32681,36621,37197,37942,38703,42419,43098,43727,44563]}'
+  clip: {fileID: 8300000, guid: c619bf3c740f1a24fac14de69134cc25, type: 3}
+  icon: {fileID: 0}
+  fallSpeed: 5
+  randomObjects:
+  - {fileID: 5792710284026368, guid: 72b31ce3a259581498e1ba64f0c8d7ff, type: 3}
+  randomObstacles:
+  - {fileID: 5792710284026368, guid: f182d3c83fa092f429d55b9f115f9bb5, type: 3}
+  obstacleChance: 20
