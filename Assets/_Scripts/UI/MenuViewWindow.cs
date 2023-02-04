@@ -20,7 +20,7 @@ public class MenuViewWindow : WindowBase
         {
             view.Show(config, onClick: () =>
             {
-                GameSession.Instance.StartGame(config);
+                WindowManager.instance.Show<StartGameScreen>().Show(config);
             });
         });
     }

@@ -86,6 +86,7 @@ public class LevelRecorder
             Debug.LogError("record not started!");
             return;
         }
+        RecordPoint();
         source.Stop();
         source = null;
         TimeKeys keys = new TimeKeys();

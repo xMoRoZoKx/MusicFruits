@@ -8,13 +8,12 @@ using UnityEngine.UI;
 
 public class LevelConfigView : MonoBehaviour
 {
-    [SerializeField] private EventTrigger trigger;
+    [SerializeField] private Button button;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private Image icon;
     public void Show(LevelConfig config, Action onClick = null)
     {
-        trigger.ClearAllEvents();
-        trigger.AddEvent(EventTriggerType.PointerClick, eventData => onClick?.Invoke());
+        button.OnClick(() => onClick?.Invoke());
         nameText.text = config.levelName;
         icon.sprite = config.icon == null ? ResourceLoader.GetDefaultIcon() : config.icon;
     }

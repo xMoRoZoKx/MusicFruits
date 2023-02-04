@@ -19,7 +19,7 @@ public partial class GameSession : Singleton<GameSession>
     }
     public void LoadMenu()
     {
-        LoadScene("Menu");
+        LoadScene("MenuScene");
     }
     public void StartGame(LevelConfig config)
     {
@@ -28,7 +28,9 @@ public partial class GameSession : Singleton<GameSession>
     }
     public void ComliteLevel(LevelConfig config, bool isWon)
     {
-        if (currentLevelConfig == null) return;
+        if (currentLevelConfig == null || config != currentLevelConfig) return;
+        LoadMenu();
+        WindowManager.instance.Show<StartGameScreen>().Show(currentLevelConfig);
         currentLevelConfig = null;
     }
     public void GiveReward(LevelConfig config)

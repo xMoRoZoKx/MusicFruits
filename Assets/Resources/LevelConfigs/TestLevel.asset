@@ -15,9 +15,12 @@ MonoBehaviour:
   timeKeysJson: '{"timeKeysMilliseconds":[5,837,1842,2750,6576,7013,7770,8577,12570,13104,13859,14524,18563,19107,19730,20645,24648,25291,25946,26644,30385,31144,31894,32681,36621,37197,37942,38703,42419,43098,43727,44563]}'
   clip: {fileID: 8300000, guid: c619bf3c740f1a24fac14de69134cc25, type: 3}
   icon: {fileID: 0}
-  fallSpeed: 5
+  fallSpeed: 15
   randomObjects:
-  - {fileID: 5792710284026368, guid: 72b31ce3a259581498e1ba64f0c8d7ff, type: 3}
+  - {fileID: 5792710284026368, guid: 1eb2fb8bfe872df449172af48ef0d4a6, type: 3}
+  - {fileID: 5792710284026368, guid: f75379dd89a1c98429ae0f801bd06972, type: 3}
+  - {fileID: 5792710284026368, guid: 696de4d62ee6b7e4980df3444338cd54, type: 3}
   randomObstacles:
   - {fileID: 5792710284026368, guid: f182d3c83fa092f429d55b9f115f9bb5, type: 3}
+  particle: {fileID: 763336987687917120, guid: 8733f71a9b027a94186cc117af2e65e1, type: 3}
   obstacleChance: 20

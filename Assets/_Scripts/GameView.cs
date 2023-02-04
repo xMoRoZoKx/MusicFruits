@@ -10,6 +10,8 @@ using UnityEngine.EventSystems;
 public class GameView : MonoBehaviour
 {
     [SerializeField] private Camera currentCamera;
+    [SerializeField] private BaseAnimationBG animationBG;
+    private AudioSource source;
     private float configSpeed => currentConfig != null ? currentConfig.fallSpeed : 10;
     private Vector3 spawnPoint;
     private Vector3 downPoint;
@@ -19,7 +21,8 @@ public class GameView : MonoBehaviour
     private float speed = 1;
     private LevelConfig currentConfig;
     private List<long> timeKeys;
-    private float cameraDistance = 12;
+    private float cameraDistance = 15;
+    private ParticleSystem particle;
     public float spawnHeight => Screen.height * 2;
     public float GetOffsetInSeconds(Vector3 positionTo)
     {
@@ -28,16 +31,20 @@ public class GameView : MonoBehaviour
     private IEnumerator Start()
     {
         var config = GameSession.Instance.currentLevelConfig;
+        currentConfig = config;
 
         spawnPoint = currentCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, spawnHeight, cameraDistance));
         downPoint = currentCamera.ScreenToWorldPoint(new Vector3(Screen.width / 2, 0, cameraDistance));
-        currentConfig = config;
+
         startOffset = GetOffsetInSeconds(downPoint);
         speed = configSpeed;
         timeKeys = config.GetTimes().timeKeysMilliseconds;
+        particle = Instantiate(config.particle, downPoint, Quaternion.identity);
+
+
         SpawnPoints(config);
         yield return new WaitForSeconds(startOffset);
-        var source = this.PlayAudio(config.clip);
+        source = this.PlayAudio(config.clip);
 
         //TODO temp
         yield return new WaitForSeconds((timeKeys[timeKeys.Count - 1] / 1000));
@@ -46,7 +53,7 @@ public class GameView : MonoBehaviour
     }
     private async void SpawnPoints(LevelConfig config)
     {
-        for (int i = 1; i < config.GetTimes().timeKeysMilliseconds.Count; i++)
+        for (int i = 1; i < config.GetTimes().timeKeysMilliseconds.Count - 1; i++)
         {
             long timeToNextKey = timeKeys[i] - timeKeys[i - 1];
             var task = TaskTools.WaitForMilliseconds(timeToNextKey, false);
@@ -63,6 +70,7 @@ public class GameView : MonoBehaviour
             {
                 newObj.AddEvent(EventTriggerType.PointerEnter, eventData =>
                 {
+                    animationBG.StartDanceAnimation(0.3f);
                     DestroyMusicObject(newObj);
                 });
                 newObj.timeKey = currentTimeKey;
@@ -75,7 +83,7 @@ public class GameView : MonoBehaviour
                 TaskTools.Wait(10, () =>
                 {
                     obstaclesInScene.Remove(obstacle);
-                    Destroy(obstacle?.gameObject);
+                    if (obstacle.gameObject != null) Destroy(obstacle.gameObject);
                 });
             }), config.obstacleChance);
 
@@ -99,7 +107,9 @@ public class GameView : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        CalculateSpeed();
+        Vector3 touchPos = GetTouchWorldPosition();
+        CalculateSpeed(touchPos);
+        particle.transform.Teleportation(touchPos.WithZ(2f));//;
         for (int i = 0; i < musicObjectsInScene.Count; i++)
         {
             musicObjectsInScene[i].transform.Move(0, -speed * Time.fixedDeltaTime, 0);
@@ -111,19 +121,21 @@ public class GameView : MonoBehaviour
         }
         obstaclesInScene.ForEach(o => o.transform.Move(0, -5 * Time.fixedDeltaTime, 0));
     }
-    public Vector3 GetCurrentTouchPosition()
+
+    public Vector2 GetTouchScreenPosition()
     {
-        var position = Vector3.zero;
+        var position = Vector2.zero;
 #if UNITY_EDITOR
-        position = currentCamera.ScreenToWorldPoint(Input.mousePosition);
+        position = Input.mousePosition;
 #else
-                if (Input.touchCount != 0) position = currentCamera.ScreenToWorldPoint(Input.GetTouch(0).position);
-                else position = downPoint;
+        if (Input.touchCount != 0) position = Input.GetTouch(0).position;
+        else position = Vector3.zero.WithY(-10);
 #endif
         return position;
     }
-    public void CalculateSpeed()
+    public Vector3 GetTouchWorldPosition() => currentCamera.ScreenToWorldPoint(GetTouchScreenPosition());
+    public void CalculateSpeed(Vector3 touchPos)
     {
-        speed = configSpeed * (GetOffsetInSeconds(GetCurrentTouchPosition()) / startOffset);
+        speed = configSpeed * (GetOffsetInSeconds(touchPos) / startOffset);
     }
 }
