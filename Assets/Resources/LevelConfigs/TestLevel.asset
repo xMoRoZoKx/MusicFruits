@@ -17,8 +17,6 @@ MonoBehaviour:
   icon: {fileID: 0}
   fallSpeed: 15
   randomObjects:
-  - {fileID: 5792710284026368, guid: 1eb2fb8bfe872df449172af48ef0d4a6, type: 3}
-  - {fileID: 5792710284026368, guid: f75379dd89a1c98429ae0f801bd06972, type: 3}
   - {fileID: 5792710284026368, guid: 696de4d62ee6b7e4980df3444338cd54, type: 3}
   randomObstacles:
   - {fileID: 5792710284026368, guid: f182d3c83fa092f429d55b9f115f9bb5, type: 3}

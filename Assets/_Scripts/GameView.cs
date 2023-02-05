@@ -68,10 +68,11 @@ public class GameView : MonoBehaviour
             }
             musicObjectsInScene.Add(SpawnObject(prefab, newObj =>
             {
-                newObj.AddEvent(EventTriggerType.PointerEnter, eventData =>
+                newObj.OnCatch(eventData =>
                 {
                     animationBG.StartDanceAnimation(0.3f);
-                    DestroyMusicObject(newObj);
+                    musicObjectsInScene.Remove(newObj);
+                    newObj.Catch(eventData);
                 });
                 newObj.timeKey = currentTimeKey;
             }));
@@ -83,7 +84,7 @@ public class GameView : MonoBehaviour
                 TaskTools.Wait(10, () =>
                 {
                     obstaclesInScene.Remove(obstacle);
-                    if (obstacle.gameObject != null) Destroy(obstacle.gameObject);
+                    Destroy(obstacle.gameObject);
                 });
             }), config.obstacleChance);
 
@@ -100,26 +101,30 @@ public class GameView : MonoBehaviour
         onSpawned?.Invoke(newObj);
         return newObj;
     }
-    private void DestroyMusicObject(MusicObject musicObject)
-    {
-        musicObjectsInScene.Remove(musicObject);
-        Destroy(musicObject.gameObject);
-    }
     private void FixedUpdate()
     {
         Vector3 touchPos = GetTouchWorldPosition();
         CalculateSpeed(touchPos);
         particle.transform.Teleportation(touchPos.WithZ(2f));//;
+        MoveMusicObjs();
+        MoveObstacles();
+    }
+    public void MoveObstacles()
+    {
+        obstaclesInScene.ForEach(o => o.transform.Move(0, -5 * Time.fixedDeltaTime, 0));
+    }
+    public void MoveMusicObjs()
+    {
         for (int i = 0; i < musicObjectsInScene.Count; i++)
         {
             musicObjectsInScene[i].transform.Move(0, -speed * Time.fixedDeltaTime, 0);
             if (musicObjectsInScene[i].transform.position.y < downPoint.y)
             {
-                DestroyMusicObject(musicObjectsInScene[i]);
+                Destroy(musicObjectsInScene[i].gameObject);
+                musicObjectsInScene.Remove(musicObjectsInScene[i]);
                 i--;
             }
         }
-        obstaclesInScene.ForEach(o => o.transform.Move(0, -5 * Time.fixedDeltaTime, 0));
     }
 
     public Vector2 GetTouchScreenPosition()

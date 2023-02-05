@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Game.UI;
+using Tools;
 
 public class Clock : BaseAnimationBG
 {
     [SerializeField] private RectTransform bg, secondsArrow, minuteArrow;
+    [SerializeField] private List<ParticleSystem> stars;
     private long endTime;
     private float stepAngle => 360 / 12;
     private Coroutine stepsCoroutune;
@@ -26,6 +28,10 @@ public class Clock : BaseAnimationBG
     }
     public override void StartDanceAnimation(float animationDuration)
     {
+        stars.GetRandoms(2).ForEach(s =>
+        {
+            if (s != null && !s.isPlaying) s.Play();
+        });
         bg.DOScale(new Vector3(1.1f, 1.1f, 1.1f), animationDuration * 0.2f).OnComplete(() =>
         {
             bg.DOScale(new Vector3(1, 1, 1), animationDuration * 0.8f);
