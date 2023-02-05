@@ -18,7 +18,7 @@ public class MusicObject : MonoBehaviour
     {
         trigger.AddEvent(EventTriggerType.PointerEnter, callBack);
     }
-    public void Catch(BaseEventData eventData)
+    public void Catch()
     {
         if (isDead) return;
         trigger?.ClearAllEvents();
@@ -26,7 +26,7 @@ public class MusicObject : MonoBehaviour
         toDestroyObjs.ForEach(o =>
         {
             o.SetActive(false);
-            rb.AddForce(((AxisEventData)eventData).moveVector.ToVector3());
+            // rb.AddForce(((AxisEventData)eventData).moveVector.ToVector3());
         });
         postDestroyObjs.ForEach(o =>
         {

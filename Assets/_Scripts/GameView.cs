@@ -72,7 +72,7 @@ public class GameView : MonoBehaviour
                 {
                     animationBG.StartDanceAnimation(0.3f);
                     musicObjectsInScene.Remove(newObj);
-                    newObj.Catch(eventData);
+                    newObj.Catch();
                 });
                 newObj.timeKey = currentTimeKey;
             }));
