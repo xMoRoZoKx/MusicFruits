@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 168763119419968392}
   - component: {fileID: 5792710284026368}
   - component: {fileID: 589284011423150002}
+  - component: {fileID: 3346849652617834333}
   m_Layer: 0
   m_Name: TestMusicObj
   m_TagString: Untagged
@@ -111,7 +112,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42bae6a1337f6a4997ebe6ec3e1d408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates: []
+  timeKey: 0
+  destroyParticle: []
+  postDestroyObjs: []
+  toDestroyObjs:
+  - {fileID: 7257328950610697172}
+  trigger: {fileID: 3346849652617834333}
+  rb: {fileID: 589284011423150002}
 --- !u!54 &589284011423150002
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -128,3 +135,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
+--- !u!114 &3346849652617834333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4698819711525052604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []

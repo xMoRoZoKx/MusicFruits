@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4698819711525052604}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &4724050252722671858
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -111,8 +111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42bae6a1337f6a4997ebe6ec3e1d408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates: []
   timeKey: 0
+  destroyParticle: []
+  postDestroyObjs: []
+  toDestroyObjs: []
+  trigger: {fileID: 0}
+  rb: {fileID: 0}
 --- !u!54 &589284011423150002
 Rigidbody:
   m_ObjectHideFlags: 0

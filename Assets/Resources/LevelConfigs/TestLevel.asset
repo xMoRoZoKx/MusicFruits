@@ -22,3 +22,4 @@ MonoBehaviour:
   - {fileID: 5792710284026368, guid: f182d3c83fa092f429d55b9f115f9bb5, type: 3}
   particle: {fileID: 763336987687917120, guid: 8733f71a9b027a94186cc117af2e65e1, type: 3}
   obstacleChance: 20
+  prize: 50

@@ -24,6 +24,7 @@ public class GameView : MonoBehaviour
     private float cameraDistance = 15;
     private ParticleSystem particle;
     public float spawnHeight => Screen.height * 2;
+    public Vector2 defaultCursorPosition => Vector2.zero;
     public float GetOffsetInSeconds(Vector3 positionTo)
     {
         return Mathf.Abs(spawnPoint.y - positionTo.y) / configSpeed;
@@ -59,37 +60,43 @@ public class GameView : MonoBehaviour
             var task = TaskTools.WaitForMilliseconds(timeToNextKey, false);
             if (task == null) return;
 
-            var currentTimeKey = timeKeys[i];
-            var prefab = config.randomObjects.GetRandom();
-            if (prefab == null)
-            {
-                Debug.LogError(config.name + " havent music objects");
-                return;
-            }
-            musicObjectsInScene.Add(SpawnObject(prefab, newObj =>
-            {
-                newObj.OnCatch(eventData =>
-                {
-                    animationBG.StartDanceAnimation(0.3f);
-                    musicObjectsInScene.Remove(newObj);
-                    newObj.Catch();
-                });
-                newObj.timeKey = currentTimeKey;
-            }));
-
-            RandomTools.InvokWithChance(() => SpawnObject(config.randomObstacles.GetRandom(), obstacle =>
-            {
-                //TODO code
-                obstaclesInScene.Add(obstacle);
-                TaskTools.Wait(10, () =>
-                {
-                    obstaclesInScene.Remove(obstacle);
-                    Destroy(obstacle.gameObject);
-                });
-            }), config.obstacleChance);
+            SpawnMusicObject(config, timeKeys[i]);
+            SpawnObstacle(config);
 
             await task;
         }
+    }
+    public void SpawnMusicObject(LevelConfig config, long currentTimeKey)
+    {
+        var prefab = config.randomObjects.GetRandom();
+        if (prefab == null)
+        {
+            Debug.LogError(config.name + " havent music objects");
+            return;
+        }
+        musicObjectsInScene.Add(SpawnObject(prefab, newObj =>
+        {
+            newObj.OnCatch(eventData =>
+            {
+                animationBG.StartDanceAnimation(0.3f);
+                musicObjectsInScene.Remove(newObj);
+                newObj.Catch();
+            });
+            newObj.timeKey = currentTimeKey;
+        }));
+    }
+    public void SpawnObstacle(LevelConfig config)
+    {
+        RandomTools.InvokWithChance(() => SpawnObject(config.randomObstacles.GetRandom(), obstacle =>
+        {
+            //TODO code
+            obstaclesInScene.Add(obstacle);
+            TaskTools.Wait(10, () =>
+            {
+                obstaclesInScene.Remove(obstacle);
+                Destroy(obstacle.gameObject);
+            });
+        }), config.obstacleChance);
     }
     public MusicObject SpawnObject(MusicObject prefab, Action<MusicObject> onSpawned = null)
     {
@@ -104,10 +111,20 @@ public class GameView : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 touchPos = GetTouchWorldPosition();
+
         CalculateSpeed(touchPos);
-        particle.transform.Teleportation(touchPos.WithZ(2f));//;
+        MoveCursor(touchPos);
         MoveMusicObjs();
         MoveObstacles();
+    }
+    public void MoveCursor(Vector3 touchPos)
+    {
+        if (Input.touchCount == 0) particle.SetActive(false);
+        else
+        {
+            particle.transform.Teleportation(touchPos.WithZ(2f));
+            particle.SetActive(true);
+        }
     }
     public void MoveObstacles()
     {
@@ -126,15 +143,14 @@ public class GameView : MonoBehaviour
             }
         }
     }
-
     public Vector2 GetTouchScreenPosition()
     {
-        var position = Vector2.zero;
+        var position = defaultCursorPosition;
 #if UNITY_EDITOR
         position = Input.mousePosition;
 #else
         if (Input.touchCount != 0) position = Input.GetTouch(0).position;
-        else position = Vector3.zero.WithY(-10);
+        else position = defaultCursorPosition;//.WithY(-10);
 #endif
         return position;
     }

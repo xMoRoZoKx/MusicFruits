@@ -8,6 +8,7 @@ using Tools;
 public class Clock : BaseAnimationBG
 {
     [SerializeField] private RectTransform bg, secondsArrow, minuteArrow;
+    [SerializeField] private List<RectTransform> scaledElements;
     [SerializeField] private List<ParticleSystem> stars;
     private long endTime;
     private float stepAngle => 360 / 12;
@@ -32,6 +33,15 @@ public class Clock : BaseAnimationBG
         {
             if (s != null && !s.isPlaying) s.Play();
         });
+
+        scaledElements.ForEach(se =>
+        {
+            se.DOScale(new Vector3(1.1f, 1.1f, 1.1f), animationDuration * 0.2f).OnComplete(() =>
+                {
+                    se.DOScale(new Vector3(1, 1, 1), animationDuration * 0.8f);
+                });
+        });
+
         bg.DOScale(new Vector3(1.1f, 1.1f, 1.1f), animationDuration * 0.2f).OnComplete(() =>
         {
             bg.DOScale(new Vector3(1, 1, 1), animationDuration * 0.8f);

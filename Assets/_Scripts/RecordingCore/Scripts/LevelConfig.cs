@@ -14,6 +14,7 @@ public class LevelConfig : ScriptableObject
     public List<MusicObject> randomObstacles;
     public ParticleSystem particle;
     public int obstacleChance = 10;
+    public int prize = 50;
 
     public TimeKeys GetTimes() => JsonUtility.FromJson<TimeKeys>(timeKeysJson);
 }

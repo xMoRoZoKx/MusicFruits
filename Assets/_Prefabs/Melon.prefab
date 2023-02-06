@@ -119,11 +119,13 @@ MonoBehaviour:
   destroyParticle:
   - {fileID: 5885406779681355633}
   postDestroyObjs:
-  - {fileID: 1729320904984161412}
-  - {fileID: 5215043104820592230}
+  - {fileID: 1914422118017495625}
+  - {fileID: 4760155829544104104}
   toDestroyObjs:
   - {fileID: 8359689292381455966}
   trigger: {fileID: -8680300778972135799}
+  collider: {fileID: 168763119419968392}
+  destroyClip: {fileID: 8300000, guid: ede33ac9dc413a843862c40e7868b158, type: 3}
 --- !u!114 &-8680300778972135799
 MonoBehaviour:
   m_ObjectHideFlags: 0
