@@ -46,7 +46,7 @@ public class LevelRecordView : MonoBehaviour
             if (!recorder.RecordStarted)
             {
                 source = this.GetOrAddCommponent<AudioSource>();
-                recorder.StartRecord(source, config.clip, timeKeys =>
+                recorder.StartRecord(source, config, onEnd: timeKeys =>
                 {
                     config.timeKeysJson = JsonUtility.ToJson(timeKeys);
 #if UNITY_EDITOR

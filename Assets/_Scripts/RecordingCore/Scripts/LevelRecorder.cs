@@ -22,11 +22,11 @@ public class LevelRecorder
     {
         return (long)(source.time.SecondsToMilliseconds());
     }
-    public void StartRecord(AudioSource audioSource, AudioClip clip, Action<TimeKeys> onEnd = null)
+    public void StartRecord(AudioSource audioSource, LevelConfig config, Action<TimeKeys> onEnd = null)
     {
         timeKeys = new List<long>();
         source = audioSource;
-        source.clip = clip;
+        source.clip = config.clip;
         source.pitch = speed;
         audioSource.Play();
         onRecordEnd = onEnd;

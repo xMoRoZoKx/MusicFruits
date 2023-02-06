@@ -26,9 +26,9 @@ public partial class GameSession : Singleton<GameSession>
         currentLevelConfig = config;
         LoadScene("GameScene");
     }
-    public void ComliteLevel(LevelConfig config, bool isWon)
+    public void ComliteLevel(bool isWon, int coins = 0)
     {
-        if (currentLevelConfig == null || config != currentLevelConfig) return;
+        if (currentLevelConfig == null) return;
         LoadMenu();
         WindowManager.instance.Show<StartGameScreen>().Show(currentLevelConfig);
         currentLevelConfig = null;

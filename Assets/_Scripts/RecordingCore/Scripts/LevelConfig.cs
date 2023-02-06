@@ -12,6 +12,7 @@ public class LevelConfig : ScriptableObject
     public int fallSpeed = 10;
     public List<MusicObject> randomObjects;
     public List<MusicObject> randomObstacles;
+    public List<MusicObject> randomCoins;
     public ParticleSystem particle;
     public int obstacleChance = 10;
     public int prize = 50;

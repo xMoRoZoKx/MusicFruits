@@ -2047,6 +2047,7 @@ MonoBehaviour:
   minuteArrow: {fileID: 1249647131}
   scaledElements:
   - {fileID: 1260612834}
+  - {fileID: 2133370000}
   stars:
   - {fileID: 1543526961}
   - {fileID: 378998058}

@@ -16,12 +16,14 @@ public class MusicObject : MonoBehaviour
     // [SerializeField] private AudioClip destroyClip;
     private bool isDead = false;
     private Vector3 rotationDelta;
-    private float minDelta => -10 * Time.deltaTime;
-    private float maxDelta => -60 * Time.deltaTime;
+    public Action OnDestroyEvent;
+    protected virtual float minDelta => -30 * Time.deltaTime;
+    protected virtual float maxDelta => -60 * Time.deltaTime;
     private void Start()
     {
         rotationDelta = new Vector3(RandDelta(), RandDelta(), RandDelta());
         float RandDelta() => UnityEngine.Random.Range(minDelta, maxDelta);
+        trigger.AddEvent(EventTriggerType.PointerEnter, eventData => Catch());
     }
     private void FixedUpdate()
     {
@@ -31,9 +33,13 @@ public class MusicObject : MonoBehaviour
     {
         if (!isDead) transform.Rotate(rotationDelta);
     }
-    public void OnCatch(Action<BaseEventData> callBack)
+    private void OnDestroy()
     {
-        trigger.AddEvent(EventTriggerType.PointerEnter, callBack);
+        OnDestroyEvent?.Invoke();
+    }
+    public void OnCatch(Action callBack)
+    {
+        trigger.AddEvent(EventTriggerType.PointerEnter, eventData => callBack?.Invoke());
     }
     public void Catch()
     {
