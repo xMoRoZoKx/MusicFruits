@@ -46,10 +46,11 @@ public partial class GameView : MonoBehaviour
         source = this.PlayAudio(currentConfig.clip);
         progress.OnChanged(value =>
         {
-            if (value != 1) return;
+            if (value - 1 <= 0.01f) return;
             if (!player.IsDead)
             {
                 SpawnCoins();
+                progress.value = 0;
             }
             else GameSession.Instance.ComliteLevel(false);
             source.Stop();

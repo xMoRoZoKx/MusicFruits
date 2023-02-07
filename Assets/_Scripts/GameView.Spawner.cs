@@ -21,9 +21,9 @@ public partial class GameView
             SpawnMusicObject(config, timeKeys[i]);
             SpawnObstacle(config);
 
-            long timeToWait =source == null ? 0 : source.time.SecondsToMilliseconds();// temp problem
+            long timeToWait = source == null ? 0 : source.time.SecondsToMilliseconds();// temp problem
             await task;
-            difference = source == null || timeToWait == 0? 0 : source.time.SecondsToMilliseconds() - timeToWait - timeToNextKey;
+            difference = source == null || timeToWait == 0 ? 0 : source.time.SecondsToMilliseconds() - timeToWait - timeToNextKey;
             Debug.LogError(difference);
         }
     }
@@ -92,7 +92,7 @@ public partial class GameView
             TaskTools.Wait(10, () =>
             {
                 obstaclesInScene.Remove(obstacle);
-                Destroy(obstacle.gameObject);
+                if (obstacle.gameObject != null) Destroy(obstacle.gameObject);
             });
         }), config.obstacleChance);
     }
