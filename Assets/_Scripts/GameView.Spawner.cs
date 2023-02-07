@@ -6,12 +6,14 @@ using UnityEngine;
 
 public partial class GameView
 {
+    private TaskAwaiter spawnTaskAwaiter;
     private async void SpawnWithRhythm(LevelConfig config)
     {
         for (int i = 1; i < config.GetTimes().timeKeysMilliseconds.Count - 1; i++)
         {
             long timeToNextKey = timeKeys[i] - timeKeys[i - 1];
-            var task = TaskTools.WaitForMilliseconds(timeToNextKey, false);
+            spawnTaskAwaiter = new TaskAwaiter();
+            var task = spawnTaskAwaiter.WaitForMilliseconds(timeToNextKey);
             if (task == null) return;
 
             SpawnMusicObject(config, timeKeys[i]);

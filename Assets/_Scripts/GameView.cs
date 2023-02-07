@@ -44,14 +44,17 @@ public partial class GameView : MonoBehaviour
         SpawnWithRhythm(currentConfig);
         yield return new WaitForSeconds(startOffset);
         source = this.PlayAudio(currentConfig.clip);
-
-        //TODO temp
-        yield return new WaitForSeconds((timeKeys[timeKeys.Count - 1] / 1000));
-        if (!player.IsDead)
+        progress.OnChanged(value =>
         {
-            SpawnCoins();
-        }
-        source.Stop();
+            if (value != 1) return;
+            if (!player.IsDead)
+            {
+                SpawnCoins();
+            }
+            source.Stop();
+        });
+        //TODO temp
+
     }
     public void Init(LevelConfig config)
     {
@@ -83,17 +86,19 @@ public partial class GameView : MonoBehaviour
         if (value)
         {
             source.Stop();
+            spawnTaskAwaiter.Pause();
         }
         else
         {
             source.Play();
+            spawnTaskAwaiter.Resume();
         }
         isPause = value;
     }
 
     private void FixedUpdate()
     {
-        if(isPause) return;
+        if (isPause) return;
         Vector3 touchPos = GetTouchWorldPosition();
         CalculateProgress();
         CalculateSpeed(touchPos);
@@ -137,7 +142,7 @@ public class PlayerInstance
     }
     public void Resurrect()
     {
-        Hp.value = 1;
+        Hp.value = 3;
     }
     public Action OnDead;
 }
