@@ -51,6 +51,7 @@ public partial class GameView : MonoBehaviour
             {
                 SpawnCoins();
             }
+            else GameSession.Instance.ComliteLevel(false);
             source.Stop();
         });
         //TODO temp
@@ -85,7 +86,7 @@ public partial class GameView : MonoBehaviour
     {
         if (value)
         {
-            source.Stop();
+            source.Pause();
             spawnTaskAwaiter.Pause();
         }
         else
@@ -127,7 +128,7 @@ public partial class GameView : MonoBehaviour
 }
 public class PlayerInstance
 {
-    public Reactive<int> Hp { get; private set; } = new Reactive<int>(3);
+    public Reactive<int> Hp { get; private set; } = new Reactive<int>(3000);
     public int CountCatchedCoins;
     public bool IsDead => Hp.value <= 0;
     public bool HaveShield;

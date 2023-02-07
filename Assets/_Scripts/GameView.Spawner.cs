@@ -6,20 +6,25 @@ using UnityEngine;
 
 public partial class GameView
 {
-    private TaskAwaiter spawnTaskAwaiter;
+    private TaskWaiting spawnTaskAwaiter;
     private async void SpawnWithRhythm(LevelConfig config)
     {
+        long difference = 0;
         for (int i = 1; i < config.GetTimes().timeKeysMilliseconds.Count - 1; i++)
         {
-            long timeToNextKey = timeKeys[i] - timeKeys[i - 1];
-            spawnTaskAwaiter = new TaskAwaiter();
-            var task = spawnTaskAwaiter.WaitForMilliseconds(timeToNextKey);
+            var currentkey = source == null ? timeKeys[i] : source.time.SecondsToMilliseconds();
+            long timeToNextKey = timeKeys[i] - timeKeys[i - 1] - difference;
+            spawnTaskAwaiter = new TaskWaiting();
+            var task = spawnTaskAwaiter.WaitForMilliseconds(timeToNextKey);//TaskTools.WaitForMilliseconds(timeToNextKey, false);
             if (task == null) return;
 
             SpawnMusicObject(config, timeKeys[i]);
             SpawnObstacle(config);
 
+            long timeToWait =source == null ? 0 : source.time.SecondsToMilliseconds();// temp problem
             await task;
+            difference = source == null || timeToWait == 0? 0 : source.time.SecondsToMilliseconds() - timeToWait - timeToNextKey;
+            Debug.LogError(difference);
         }
     }
     private void SpawnCoins()
