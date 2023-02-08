@@ -51,7 +51,6 @@ public class MusicObject : MonoBehaviour
         toDestroyObjs.ForEach(o =>
         {
             o.SetActive(false);
-            // rb.AddForce(((AxisEventData)eventData).moveVector.ToVector3());
         });
         postDestroyObjs.ForEach(o =>
         {

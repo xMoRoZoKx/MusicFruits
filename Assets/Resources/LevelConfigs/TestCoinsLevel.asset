@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 099410705cbfe354bb4f89ecc023c6f6, type: 3}
+  m_Name: TestCoinsLevel
+  m_EditorClassIdentifier: 
+  timeKeysJson: '{"timeKeysMilliseconds":[0,1000,2000]}'
+  clip: {fileID: 8300000, guid: c619bf3c740f1a24fac14de69134cc25, type: 3}
+  icon: {fileID: 0}
+  fallSpeed: 15
+  randomObjects:
+  - {fileID: 5792710284026368, guid: 696de4d62ee6b7e4980df3444338cd54, type: 3}
+  randomObstacles:
+  - {fileID: 5792710284026368, guid: f182d3c83fa092f429d55b9f115f9bb5, type: 3}
+  randomCoins:
+  - {fileID: 7352448133639032853, guid: 7670e4075d253394e80f51e8f928ed74, type: 3}
+  - {fileID: -7333904736338726390, guid: 4eca7a8ef879cfb41b294a8c0d69ea58, type: 3}
+  particle: {fileID: 763336987687917120, guid: 8733f71a9b027a94186cc117af2e65e1, type: 3}
+  obstacleChance: 100
+  prize: 50

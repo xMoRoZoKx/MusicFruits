@@ -10,7 +10,7 @@ public class LosingGameScreen : WindowBase
     public Image filled;
     public Button acceptBtn;
     private Coroutine timerCoroutine;
-    public void Show(Action onContinue)
+    public void Show(Action onContinue, Action onTimerEnd)
     {
         acceptBtn.OnClick(() =>
         {
@@ -18,16 +18,17 @@ public class LosingGameScreen : WindowBase
             if (timerCoroutine != null) StopCoroutine(timerCoroutine);
             Close();
         });
-        timerCoroutine = StartCoroutine(Timer(5));
+        timerCoroutine = StartCoroutine(Timer(5, onTimerEnd));
     }
-    private IEnumerator Timer(int secondsCount)
+    private IEnumerator Timer(int secondsCount, Action onTimerEnd)
     {
-        var wait = new WaitForFixedUpdate();
-        while (filled.fillAmount >= 0)
+        var wait = new WaitForFixedUpdate(); 
+        filled.fillAmount = 1;
+        while (filled.fillAmount > 0)
         {
-            filled.fillAmount -= Time.deltaTime / secondsCount;
+            filled.fillAmount -= Time.fixedDeltaTime / secondsCount;
             yield return wait;
         }
-        GameSession.Instance.ComliteLevel(false);
+        onTimerEnd.Invoke();
     }
 }

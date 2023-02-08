@@ -6,6 +6,9 @@ using UnityEngine;
 public partial class GameView
 {
 
+    private const float coinsSpeed = 7, obstaclesSpeed = 5;
+    private float configSpeed => currentConfig != null ? currentConfig.fallSpeed : 10;
+    private float speed = 1;
     public void MoveCursor(Vector3 touchPos)
     {
         if (Input.touchCount != 0)

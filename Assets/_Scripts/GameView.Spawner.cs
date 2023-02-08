@@ -3,18 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using Tools;
 using UnityEngine;
+using static TaskTools;
 
 public partial class GameView
 {
+    public float spawnHeight => Screen.height * 2;
+    private Vector2 spawnScreenPoint => new Vector3(Screen.width / 2, spawnHeight, cameraDistance);
+    private Vector2 downScreenPoint => new Vector3(Screen.width / 2, 0, cameraDistance);
+    private Vector3 spawnPoint;
+    private Vector3 downPoint;
+    private List<MusicObject> musicObjectsInScene = new List<MusicObject>();
+    private List<MusicObject> obstaclesInScene = new List<MusicObject>();
+    private List<MusicObject> coinsInScene = new List<MusicObject>();
+    private float startOffset = 0;
     private TaskWaiting spawnTaskAwaiter;
     private async void SpawnWithRhythm(LevelConfig config)
     {
         long difference = 0;
+        spawnTaskAwaiter = new TaskWaiting();
         for (int i = 1; i < config.GetTimes().timeKeysMilliseconds.Count - 1; i++)
         {
             var currentkey = source == null ? timeKeys[i] : source.time.SecondsToMilliseconds();
             long timeToNextKey = timeKeys[i] - timeKeys[i - 1] - difference;
-            spawnTaskAwaiter = new TaskWaiting();
             var task = spawnTaskAwaiter.WaitForMilliseconds(timeToNextKey);//TaskTools.WaitForMilliseconds(timeToNextKey, false);
             if (task == null) return;
 
@@ -24,27 +34,31 @@ public partial class GameView
             long timeToWait = source == null ? 0 : source.time.SecondsToMilliseconds();// temp problem
             await task;
             difference = source == null || timeToWait == 0 ? 0 : source.time.SecondsToMilliseconds() - timeToWait - timeToNextKey;
-            Debug.LogError(difference);
         }
     }
     private void SpawnCoins()
     {
-        int countInLine = 4;
+        int countInLine = 5;
+        int countInRow = 10;
+        float cameraDistance = 10;
         Vector3 spawnPos = spawnScreenPoint;
         spawnPos = spawnPos.WithZ(cameraDistance);
-        float spacing = Screen.width / countInLine;
 
+        float spacing = Screen.height / countInRow;
         for (int i = 0; i < currentConfig.prize / countInLine; i++)
         {
             spawnPos = spawnPos.WithX(0).WithY(spawnPos.y + spacing);
             SpawnLine(countInLine);
         }
+        spawnPos = spawnPos.WithX(0).WithY(spawnPos.y + spacing);
         SpawnLine(currentConfig.prize % countInLine);
 
         void SpawnLine(int count)
         {
-            for (int j = 0; j < count; j++)
+            float spacing = Screen.width / (count + 1);
+            for (int j = 1; j < count + 1; j++)
             {
+                spawnPos = spawnPos.WithX(spacing * j);
                 var newObj = Instantiate(currentConfig.randomCoins.GetRandom(), currentCamera.ScreenToWorldPoint(spawnPos), Quaternion.identity);
                 newObj.OnCatch(() =>
                 {
@@ -56,7 +70,6 @@ public partial class GameView
                     if (coinsInScene.Count == 0) GameSession.Instance.ComliteLevel(true, player.CountCatchedCoins);
                 };
                 coinsInScene.Add(newObj);
-                spawnPos = spawnPos.WithX(spawnPos.x + spacing);
             }
         }
 
@@ -92,7 +105,7 @@ public partial class GameView
             TaskTools.Wait(10, () =>
             {
                 obstaclesInScene.Remove(obstacle);
-                if (obstacle.gameObject != null) Destroy(obstacle.gameObject);
+                if (obstacle != null) Destroy(obstacle.gameObject);
             });
         }), config.obstacleChance);
     }

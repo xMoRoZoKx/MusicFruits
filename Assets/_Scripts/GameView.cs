@@ -13,65 +13,58 @@ public partial class GameView : MonoBehaviour
     [SerializeField] private Camera currentCamera;
     [SerializeField] private BaseAnimationBG animationBG;
     private AudioSource source;
-    private float configSpeed => currentConfig != null ? currentConfig.fallSpeed : 10;
-    private Vector2 spawnScreenPoint => new Vector3(Screen.width / 2, spawnHeight, cameraDistance);
-    private Vector2 downScreenPoint => new Vector3(Screen.width / 2, 0, cameraDistance);
-    private Vector3 spawnPoint;
-    private Vector3 downPoint;
-    private List<MusicObject> musicObjectsInScene = new List<MusicObject>();
-    private List<MusicObject> obstaclesInScene = new List<MusicObject>();
-    private List<MusicObject> coinsInScene = new List<MusicObject>();
-    private float startOffset = 0;
-    private float speed = 1;
     private LevelConfig currentConfig;
     private List<long> timeKeys;
     private float cameraDistance = 15;
     private ParticleSystem particle;
-    public float spawnHeight => Screen.height * 2;
     public Vector2 defaultCursorPosition => Vector2.zero;
     private PlayerInstance player;
     private Reactive<float> progress = new Reactive<float>();
-    private const float coinsSpeed = 7, obstaclesSpeed = 5;
     private bool isPause;
+    private bool isLevelComplete;
     public float GetOffsetInSeconds(Vector3 positionTo)
     {
         return Mathf.Abs(spawnPoint.y - positionTo.y) / configSpeed;
     }
-    private IEnumerator Start()
+    private void Start()
     {
         Init(GameSession.Instance.currentLevelConfig);
 
+        StartCoroutine(StartGame());
+    }
+    public IEnumerator StartGame()
+    {
         SpawnWithRhythm(currentConfig);
         yield return new WaitForSeconds(startOffset);
         source = this.PlayAudio(currentConfig.clip);
-        progress.OnChanged(value =>
+        progress.Subscribe(value =>
         {
-            if (value - 1 <= 0.01f) return;
-            if (!player.IsDead)
-            {
-                SpawnCoins();
-                progress.value = 0;
-            }
-            else GameSession.Instance.ComliteLevel(false);
-            source.Stop();
-        });
-        //TODO temp
+            if (value - 1 <= 0.01f || isLevelComplete) return;
 
+            if (!player.IsDead) SpawnCoins();
+            else GameSession.Instance.ComliteLevel(false);
+
+            source.Stop();
+            isLevelComplete = true;
+        });
     }
     public void Init(LevelConfig config)
     {
         player = new PlayerInstance();
         player.OnDead = () =>
         {
-            WindowManager.instance.Show<LosingGameScreen>().Show(() =>
+            WindowManager.instance.Show<LosingGameScreen>().Show(
+            onContinue: () =>
             {
                 player.Resurrect();
                 Pause(false);
+            },
+            onTimerEnd: () =>
+            {
+                GameSession.Instance.ComliteLevel(false);
             });
             Pause(true);
-            // GameSession.Instance.ComliteLevel(currentConfig, true);
         };
-
 
         currentConfig = config;
 
@@ -82,6 +75,20 @@ public partial class GameView : MonoBehaviour
         speed = configSpeed;
         timeKeys = config.GetTimes().timeKeysMilliseconds;
         particle = Instantiate(config.particle, downPoint, Quaternion.identity);
+
+        WindowManager.instance.Show<GameHUDScreen>().Show(player.Hp, progress);
+    }
+
+    private void FixedUpdate()
+    {
+        if (isPause) return;
+        Vector3 touchPos = GetTouchWorldPosition();
+        CalculateProgress();
+        CalculateSpeed(touchPos);
+        MoveCursor(touchPos);
+        MoveMusicObjs();
+        MoveObstacles();
+        MoveCoins();
     }
     public void Pause(bool value)
     {
@@ -96,18 +103,6 @@ public partial class GameView : MonoBehaviour
             spawnTaskAwaiter.Resume();
         }
         isPause = value;
-    }
-
-    private void FixedUpdate()
-    {
-        if (isPause) return;
-        Vector3 touchPos = GetTouchWorldPosition();
-        CalculateProgress();
-        CalculateSpeed(touchPos);
-        MoveCursor(touchPos);
-        MoveMusicObjs();
-        MoveObstacles();
-        MoveCoins();
     }
     public Vector2 GetTouchScreenPosition()
     {
@@ -129,7 +124,7 @@ public partial class GameView : MonoBehaviour
 }
 public class PlayerInstance
 {
-    public Reactive<int> Hp { get; private set; } = new Reactive<int>(3000);
+    public Reactive<int> Hp { get; private set; } = new Reactive<int>(3);
     public int CountCatchedCoins;
     public bool IsDead => Hp.value <= 0;
     public bool HaveShield;
