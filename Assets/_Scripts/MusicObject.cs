@@ -13,7 +13,7 @@ public class MusicObject : MonoBehaviour
     [SerializeField] private List<Transform> toDestroyObjs;
     [SerializeField] private EventTrigger trigger;
     [SerializeField] private Collider collider;
-    // [SerializeField] private AudioClip destroyClip;
+    [SerializeField] private AudioClip destroyClip;
     private bool isDead = false;
     private Vector3 rotationDelta;
     public Action OnDestroyEvent;
@@ -24,6 +24,7 @@ public class MusicObject : MonoBehaviour
         rotationDelta = new Vector3(RandDelta(), RandDelta(), RandDelta());
         float RandDelta() => UnityEngine.Random.Range(minDelta, maxDelta);
         trigger.AddEvent(EventTriggerType.PointerEnter, eventData => Catch());
+        ReactiveList<MultiButton> t = new ReactiveList<MultiButton>();
     }
     private void FixedUpdate()
     {
@@ -44,7 +45,7 @@ public class MusicObject : MonoBehaviour
     public void Catch()
     {
         if (isDead) return;
-        // this.PlayAudio(destroyClip);
+        if(destroyClip != null) this.PlayAudio(destroyClip);
         collider.enabled = false;
         trigger?.ClearAllEvents();
         destroyParticle.ForEach(p => p?.Play());

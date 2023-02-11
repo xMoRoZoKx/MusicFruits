@@ -1680,7 +1680,7 @@ MonoBehaviour:
   save: {fileID: 1328182501}
   stop: {fileID: 1414640988}
   slider: {fileID: 1387737130}
-  config: {fileID: 11400000, guid: f118a1acfec1a8048a4d017530f7473d, type: 2}
+  config: {fileID: 11400000, guid: 0fcd144ec79480d47919fd76dfb5a716, type: 2}
   xButton: {fileID: 1800205255}
 --- !u!4 &1620861343
 Transform:
