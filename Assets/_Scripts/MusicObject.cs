@@ -5,6 +5,8 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Tools;
+using Game.CodeTools;
+
 public class MusicObject : MonoBehaviour
 {
     [HideInInspector] public long timeKey;
@@ -24,7 +26,6 @@ public class MusicObject : MonoBehaviour
         rotationDelta = new Vector3(RandDelta(), RandDelta(), RandDelta());
         float RandDelta() => UnityEngine.Random.Range(minDelta, maxDelta);
         trigger.AddEvent(EventTriggerType.PointerEnter, eventData => Catch());
-        ReactiveList<MultiButton> t = new ReactiveList<MultiButton>();
     }
     private void FixedUpdate()
     {
