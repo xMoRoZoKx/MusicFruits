@@ -9,7 +9,7 @@ public partial class GameView
 {
     public float spawnHeight => Screen.height * 2;
     private Vector2 spawnScreenPoint => new Vector3(Screen.width / 2, spawnHeight, cameraDistance);
-    private Vector2 downScreenPoint => new Vector3(Screen.width / 2, 0, cameraDistance);
+    private Vector2 downScreenPoint => new Vector3(Screen.width / 2, -1, cameraDistance);
     private Vector3 spawnPoint;
     private Vector3 downPoint;
     private List<MusicObject> musicObjectsInScene = new List<MusicObject>();
@@ -113,7 +113,7 @@ public partial class GameView
     {
         if (prefab == null) return null;
 
-        var frame = Screen.width / 10;
+        var frame = Screen.width / 7;
         var randomSpawnPoint = currentCamera.ScreenToWorldPoint(new Vector3(UnityEngine.Random.Range(0 + frame, Screen.width - frame), spawnHeight, cameraDistance));
         var newObj = Instantiate(prefab, randomSpawnPoint, Quaternion.identity);
         onSpawned?.Invoke(newObj);

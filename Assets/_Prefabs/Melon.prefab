@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4698819711525052604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6016604976666504337}
@@ -125,7 +125,8 @@ MonoBehaviour:
   - {fileID: 8359689292381455966}
   trigger: {fileID: -8680300778972135799}
   collider: {fileID: 168763119419968392}
-  destroyClip: {fileID: 8300000, guid: ede33ac9dc413a843862c40e7868b158, type: 3}
+  destroyClip: {fileID: 8300000, guid: 5a4d849ec0802a44d80c2ddea5255a75, type: 3}
+  rotateForce: 1
 --- !u!114 &-8680300778972135799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +293,10 @@ PrefabInstance:
     - target: {fileID: 1955646447211667299, guid: f0fd291f44341a44fb9dc45391324a25, type: 3}
       propertyPath: m_Name
       value: Melon half
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955646447211667299, guid: f0fd291f44341a44fb9dc45391324a25, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1955646447211667299, guid: f0fd291f44341a44fb9dc45391324a25, type: 3}
       propertyPath: m_IsActive
@@ -487,6 +492,10 @@ PrefabInstance:
     - target: {fileID: 1955646447211667299, guid: f0fd291f44341a44fb9dc45391324a25, type: 3}
       propertyPath: m_Name
       value: Melon half (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1955646447211667299, guid: f0fd291f44341a44fb9dc45391324a25, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1955646447211667299, guid: f0fd291f44341a44fb9dc45391324a25, type: 3}
       propertyPath: m_IsActive

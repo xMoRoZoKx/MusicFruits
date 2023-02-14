@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4698819711525052604}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8617531255595444128}
@@ -125,7 +125,8 @@ MonoBehaviour:
   - {fileID: 4992520053938567390}
   trigger: {fileID: -4976077972638144474}
   collider: {fileID: 168763119419968392}
-  destroyClip: {fileID: 8300000, guid: ede33ac9dc413a843862c40e7868b158, type: 3}
+  destroyClip: {fileID: 8300000, guid: 5a4d849ec0802a44d80c2ddea5255a75, type: 3}
+  rotateForce: 1
 --- !u!114 &-4976077972638144474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,6 +289,10 @@ PrefabInstance:
     - target: {fileID: 5341857407889382304, guid: 00a6da929c50c3e4cbddef516a2a2263, type: 3}
       propertyPath: m_Name
       value: Tomato Half (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341857407889382304, guid: 00a6da929c50c3e4cbddef516a2a2263, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5341857407889382304, guid: 00a6da929c50c3e4cbddef516a2a2263, type: 3}
       propertyPath: m_IsActive
@@ -479,6 +484,10 @@ PrefabInstance:
     - target: {fileID: 5341857407889382304, guid: 00a6da929c50c3e4cbddef516a2a2263, type: 3}
       propertyPath: m_Name
       value: Tomato Half
+      objectReference: {fileID: 0}
+    - target: {fileID: 5341857407889382304, guid: 00a6da929c50c3e4cbddef516a2a2263, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5341857407889382304, guid: 00a6da929c50c3e4cbddef516a2a2263, type: 3}
       propertyPath: m_IsActive

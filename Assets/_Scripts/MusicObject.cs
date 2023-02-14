@@ -16,11 +16,12 @@ public class MusicObject : MonoBehaviour
     [SerializeField] private EventTrigger trigger;
     [SerializeField] private Collider collider;
     [SerializeField] private AudioClip destroyClip;
+    [SerializeField] private float rotateForce = 1;
     private bool isDead = false;
     private Vector3 rotationDelta;
     public Action OnDestroyEvent;
-    protected virtual float minDelta => -30 * Time.deltaTime;
-    protected virtual float maxDelta => -60 * Time.deltaTime;
+    protected virtual float minDelta => -30 * Time.deltaTime * rotateForce;
+    protected virtual float maxDelta => -60 * Time.deltaTime * rotateForce;
     private void Start()
     {
         rotationDelta = new Vector3(RandDelta(), RandDelta(), RandDelta());
@@ -39,14 +40,14 @@ public class MusicObject : MonoBehaviour
     {
         OnDestroyEvent?.Invoke();
     }
-    public void OnCatch(Action callBack)
+    public virtual void OnCatch(Action callBack)
     {
         trigger.AddEvent(EventTriggerType.PointerEnter, eventData => callBack?.Invoke());
     }
-    public void Catch()
+    public virtual void Catch()
     {
         if (isDead) return;
-        if(destroyClip != null) this.PlayAudio(destroyClip);
+        if (destroyClip != null) this.PlayAudio(destroyClip, 0.5f);
         collider.enabled = false;
         trigger?.ClearAllEvents();
         destroyParticle.ForEach(p => p?.Play());
@@ -57,6 +58,7 @@ public class MusicObject : MonoBehaviour
         postDestroyObjs.ForEach(o =>
         {
             o.SetActive(true);
+            // TaskTools.Wait(1f, () => o.GetComponent<BoxCollider>().enabled = false);
         });
         if (gameObject) Destroy(gameObject, 10);
         isDead = true;
