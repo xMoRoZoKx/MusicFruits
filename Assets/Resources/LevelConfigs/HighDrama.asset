@@ -17,9 +17,9 @@ MonoBehaviour:
   icon: {fileID: 0}
   fallSpeed: 20
   randomObjects:
-  - {fileID: 5792710284026368, guid: 696de4d62ee6b7e4980df3444338cd54, type: 3}
-  - {fileID: 5792710284026368, guid: 1eb2fb8bfe872df449172af48ef0d4a6, type: 3}
-  - {fileID: 1740177161783490266, guid: f75379dd89a1c98429ae0f801bd06972, type: 3}
+  - {fileID: 5183033931943468477, guid: a0cc6d368fdc9774698b6e20efa5a63f, type: 3}
+  - {fileID: 2477536830609026144, guid: bb59240ba0db63e45aafebc74febd762, type: 3}
+  - {fileID: 2223839517281330278, guid: c9598044c3b54ad41a13aacc8fafc78e, type: 3}
   randomObstacles:
   - {fileID: 5792710284026368, guid: f182d3c83fa092f429d55b9f115f9bb5, type: 3}
   randomCoins:

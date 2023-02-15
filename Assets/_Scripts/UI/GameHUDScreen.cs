@@ -8,9 +8,9 @@ using UnityEngine.UI;
 
 public class GameHUDScreen : WindowBase
 {
-    [SerializeField] private Image fieldImg;
     [SerializeField] private RectTransform heathPrefab;
     [SerializeField] private RectTransform container;
+    [SerializeField] private StarsProgressBar progressBar;
     private List<Transform> views = new List<Transform>();
     
     public void Show(Reactive<int> hp, Reactive<float> progress)
@@ -25,9 +25,6 @@ public class GameHUDScreen : WindowBase
                 views[i].SetActive(true);
             }
         });
-        progress.SubscribeAndInvoke(value =>
-        {
-            fieldImg.fillAmount = value;
-        });
+        progressBar.Show(progress);
     }
 }

@@ -44,7 +44,7 @@ public partial class GameView : MonoBehaviour
             if (!player.IsDead) SpawnCoins();
             else GameSession.Instance.ComliteLevel(false);
 
-            source.Stop();
+            source.Pause();
             isLevelComplete = true;
         });
     }
