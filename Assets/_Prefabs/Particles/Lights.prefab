@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2110314678667263822}
   - component: {fileID: 3706962431041150927}
   m_Layer: 0
-  m_Name: FirefliesParticle
+  m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

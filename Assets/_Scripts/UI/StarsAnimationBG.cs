@@ -8,7 +8,7 @@ using Tools;
 public class StarsAnimationBG : BaseAnimationBG
 {
     // [SerializeField] private RectTransform bg, secondsArrow, minuteArrow;
-    [SerializeField] private List<RectTransform> scaledElements;
+    [SerializeField] private List<Transform> scaledElements;
     [SerializeField] private List<ParticleSystem> stars;
     private long endTime;
     private float stepAngle => 360 / 12;
@@ -36,7 +36,7 @@ public class StarsAnimationBG : BaseAnimationBG
 
         scaledElements.ForEach(se =>
         {
-            se.DOScale(new Vector3(1.05f, 1.05f, 1.05f), animationDuration * 0.2f).OnComplete(() =>
+            se.DOScale(new Vector3(1.02f, 1.02f, 1.02f), animationDuration * 0.5f).OnComplete(() =>
                 {
                     se.DOScale(new Vector3(1, 1, 1), animationDuration * 0.5f);
                 });
