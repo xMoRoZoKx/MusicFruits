@@ -114,7 +114,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -142.18103}
-  m_SizeDelta: {x: 64.20889, y: 11.1226}
+  m_SizeDelta: {x: 800, y: 7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6900310507239700958
 CanvasRenderer:
@@ -170,3 +170,7 @@ MonoBehaviour:
   starPrefab: {fileID: 4170271026602806065, guid: c3723a8ca1a27e44885f095a331751e2, type: 3}
   starOnColor: {r: 1, g: 1, b: 1, a: 1}
   starOffColor: {r: 0, g: 0.018150356, b: 0.33962262, a: 1}
+  starPointsInPrecent:
+  - 30
+  - 70
+  - 100

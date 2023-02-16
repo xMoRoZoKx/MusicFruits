@@ -27,18 +27,19 @@ public class StarsAnimationBG : BaseAnimationBG
     //         minuteArrow.DORotate(new Vector3(0, 0, minuteArrow.rotation.eulerAngles.z - (stepAngle / 12)), 0.5f);
     //     }
     // }
-    public override void StartDanceAnimation(float animationDuration = 0.5f)
+    public override void StartDanceAnimation(float duration = 0.5f)
     {
-        stars.GetRandoms(2).ForEach(s =>
-        {
-            if (s != null && !s.isPlaying) s.Play();
-        });
-
+        // stars.GetRandoms(2).ForEach(s =>
+        // {
+        //     if (s != null && !s.isPlaying) s.Play();
+        // });
+        var star = stars.GetRandom();
+        if (star != null && !star.isPlaying) star.Play();
         scaledElements.ForEach(se =>
         {
-            se.DOScale(new Vector3(1.02f, 1.02f, 1.02f), animationDuration * 0.5f).OnComplete(() =>
+            se.DOScale(new Vector3(1.02f, 1.02f, 1.02f), duration * 0.5f).OnComplete(() =>
                 {
-                    se.DOScale(new Vector3(1, 1, 1), animationDuration * 0.5f);
+                    se.DOScale(new Vector3(1, 1, 1), duration * 0.5f);
                 });
         });
 

@@ -191,9 +191,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4932142341756375960}
     m_Modifications:
+    - target: {fileID: 649581848406412659, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649581848406412659, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: m_FillAmount
+      value: 0.246
+      objectReference: {fileID: 0}
+    - target: {fileID: 649581848406412659, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1607272331851504242, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
       propertyPath: m_Name
       value: progressBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721918809626245852, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3721918809626245852, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5634530626763066562, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
       propertyPath: m_Pivot.x
@@ -225,11 +245,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5634530626763066562, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -171.7911
+      value: -256.7878
       objectReference: {fileID: 0}
     - target: {fileID: 5634530626763066562, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 7.4136
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5634530626763066562, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
       propertyPath: m_LocalPosition.x
@@ -265,7 +285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5634530626763066562, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140.32654
+      value: -124.38721
       objectReference: {fileID: 0}
     - target: {fileID: 5634530626763066562, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -277,6 +297,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5634530626763066562, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7284419298746817587, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: starOnColor.b
+      value: 0.9324631
+      objectReference: {fileID: 0}
+    - target: {fileID: 7284419298746817587, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: starOnColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7284419298746817587, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: starOnColor.r
+      value: 0.67358494
+      objectReference: {fileID: 0}
+    - target: {fileID: 7284419298746817587, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: starOffColor.b
+      value: 0.2735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 7284419298746817587, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: starOffColor.g
+      value: 0.015723273
+      objectReference: {fileID: 0}
+    - target: {fileID: 7284419298746817587, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: starOffColor.r
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

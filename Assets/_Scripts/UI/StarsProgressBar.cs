@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.CodeTools;
 using Tools;
+using UITools;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,25 +11,26 @@ public class StarsProgressBar : MonoBehaviour
     [SerializeField] private Image fieldImg;
     [SerializeField] private Image starPrefab;
     [SerializeField] private Color starOnColor, starOffColor;
+    [SerializeField] private float[] starPointsInPercent = { 30, 70, 100 };
     private List<Image> stars = new List<Image>();
-    private float[] starPointsInPrecent = { 20, 50, 80 };
-    public void Show(Reactive<float> progress)
+    public void Show(Reactive<float> progress, Canvas canvas)
     {
-        var rectTransform = GetComponent<RectTransform>();
-        foreach (var precent in starPointsInPrecent)
+        var starsContainer = GetComponent<RectTransform>();
+        foreach (var precent in starPointsInPercent)
         {
             var star = Instantiate(starPrefab, transform);
             stars.Add(star);
             star.color = starOffColor;
-            var startPos = rectTransform.position.WithX(rectTransform.position.x+ rectTransform.sizeDelta.x / 2);// 
-            star.rectTransform.position = startPos.WithX(startPos.x - rectTransform.sizeDelta.x / 100 * precent);//+
+            float rectWidth = starsContainer.GetWidth(canvas.scaleFactor);
+            var startPos = starsContainer.position.WithX(starsContainer.position.x - (rectWidth / 2));
+            star.rectTransform.position = startPos.WithX(startPos.x + (rectWidth/ 100 * precent));
         }
         progress.SubscribeAndInvoke(value =>
         {
             fieldImg.fillAmount = value;
-            for (int i = 0; i < starPointsInPrecent.Length; i++)
+            for (int i = 0; i < starPointsInPercent.Length; i++)
             {
-                if (value * 100 >= starPointsInPrecent[i] && stars[i].color != starOnColor)
+                if (value * 100 >= starPointsInPercent[i] && stars[i].color != starOnColor)
                 {
                     stars[i].color = starOnColor;
                 }

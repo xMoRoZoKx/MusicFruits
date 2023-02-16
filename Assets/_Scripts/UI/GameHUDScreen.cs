@@ -12,7 +12,7 @@ public class GameHUDScreen : WindowBase
     [SerializeField] private RectTransform container;
     [SerializeField] private StarsProgressBar progressBar;
     private List<Transform> views = new List<Transform>();
-    
+
     public void Show(Reactive<int> hp, Reactive<float> progress)
     {
         hp.SubscribeAndInvoke(value =>
@@ -25,6 +25,6 @@ public class GameHUDScreen : WindowBase
                 views[i].SetActive(true);
             }
         });
-        progressBar.Show(progress);
+        progressBar.Show(progress, WindowManager.instance.canvas);
     }
 }

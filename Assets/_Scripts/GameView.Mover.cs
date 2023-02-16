@@ -13,8 +13,10 @@ public partial class GameView
     {
         if (Input.touchCount != 0)
         {
+            particle.SetActive(true);
             particle.transform.Teleportation(touchPos.WithZ(2f));
         }
+        else particle.SetActive(false);
 #if UNITY_EDITOR
         particle.transform.Teleportation(touchPos.WithZ(2f));
 #endif
