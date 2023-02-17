@@ -60,9 +60,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: acbc8d78b0831b2458c6c1631b6d9635, type: 2}
   m_Color: {r: 0, g: 1, b: 0.84607387, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -138,9 +138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0.026638499, g: 0, b: 0.2264151, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -170,7 +170,7 @@ MonoBehaviour:
   starPrefab: {fileID: 4170271026602806065, guid: c3723a8ca1a27e44885f095a331751e2, type: 3}
   starOnColor: {r: 1, g: 1, b: 1, a: 1}
   starOffColor: {r: 0, g: 0.018150356, b: 0.33962262, a: 1}
-  starPointsInPrecent:
+  starPointsInPercent:
   - 30
   - 70
   - 100

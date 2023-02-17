@@ -192,8 +192,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 4932142341756375960}
     m_Modifications:
     - target: {fileID: 649581848406412659, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8470588
+      objectReference: {fileID: 0}
+    - target: {fileID: 649581848406412659, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 649581848406412659, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649581848406412659, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
       propertyPath: m_Maskable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 649581848406412659, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 649581848406412659, guid: 03e4044aeb95da74cade8547b28f5f94, type: 3}
       propertyPath: m_FillAmount
