@@ -15,6 +15,11 @@ public class StarsProgressBar : MonoBehaviour
     private List<Image> stars = new List<Image>();
     public void Show(Reactive<float> progress, Canvas canvas)
     {
+        stars.ForEach(s =>
+        {
+            Destroy(s.gameObject);
+        });
+        stars.Clear();
         var starsContainer = GetComponent<RectTransform>();
         foreach (var precent in starPointsInPercent)
         {
@@ -23,7 +28,7 @@ public class StarsProgressBar : MonoBehaviour
             star.color = starOffColor;
             float rectWidth = starsContainer.GetWidth(canvas.scaleFactor);
             var startPos = starsContainer.position.WithX(starsContainer.position.x - (rectWidth / 2));
-            star.rectTransform.position = startPos.WithX(startPos.x + (rectWidth/ 100 * precent));
+            star.rectTransform.position = startPos.WithX(startPos.x + (rectWidth / 100 * precent));
         }
         progress.SubscribeAndInvoke(value =>
         {
