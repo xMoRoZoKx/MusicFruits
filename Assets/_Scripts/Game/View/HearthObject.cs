@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaffObject : MusicObject
+public class HearthObject : MusicObject
 {
     private PlayerInstance player;
     public void Init(PlayerInstance player)

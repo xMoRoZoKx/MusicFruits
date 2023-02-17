@@ -71,24 +71,24 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Lumin: 0.14
-    - _MaxLight: 1
+    - _Lumin: 0.92
+    - _MaxLight: 0.696
     - _Metallic: 0
-    - _MinLight: 0
+    - _MinLight: 0.169
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Offset: 0
-    - _OtlWidth: 0.71
+    - _OtlWidth: 1.16
     - _Parallax: 0.02
     - _Segmented: 1
-    - _ShnIntense: 0.047
+    - _ShnIntense: 0.307
     - _ShnOverlap: 0
-    - _ShnRange: 0.144
-    - _ShnSmooth: 0
+    - _ShnRange: 0.169
+    - _ShnSmooth: 0.252
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Steps: 3
+    - _Steps: 25
     - _StpSmooth: 0.032
     - _UVSec: 0
     - _ZWrite: 1
@@ -96,5 +96,5 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OtlColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ShnColor: {r: 1, g: 1, b: 0, a: 1}
+    - _ShnColor: {r: 1, g: 0.18360189, b: 0, a: 1}
   m_BuildTextureStacks: []

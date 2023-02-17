@@ -64,6 +64,7 @@ public partial class GameView
                 {
                     model.CountCatchedCoins++;
                     coinsInScene.Remove(newObj);
+                    if (coinsInScene.Count == 0) GameSession.Instance.ComliteLevel(true);
                 });
                 newObj.OnDestroyEvent = () =>
                 {

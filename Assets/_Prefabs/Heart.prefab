@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33775494356401126}
   - component: {fileID: 23251488334285914}
   - component: {fileID: 135408418541661930}
+  - component: {fileID: 6645279964881322292}
   m_Layer: 2
   m_Name: Heart
   m_TagString: Untagged
@@ -97,3 +98,23 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.25295
   m_Center: {x: -0.00000007071872, y: 0.12511864, z: 0.000000003867206}
+--- !u!114 &6645279964881322292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781561378815422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a542b74284403f44481fb1ad007bdef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeKey: 0
+  destroyParticle: []
+  postDestroyObjs: []
+  toDestroyObjs: []
+  trigger: {fileID: 0}
+  collider: {fileID: 0}
+  destroyClip: {fileID: 0}
+  rotateForce: 0
