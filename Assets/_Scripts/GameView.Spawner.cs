@@ -62,12 +62,12 @@ public partial class GameView
                 var newObj = Instantiate(currentConfig.randomCoins.GetRandom(), currentCamera.ScreenToWorldPoint(spawnPos), Quaternion.identity);
                 newObj.OnCatch(() =>
                 {
-                    player.CountCatchedCoins++;
+                    model.CountCatchedCoins++;
                     coinsInScene.Remove(newObj);
                 });
                 newObj.OnDestroyEvent = () =>
                 {
-                    if (coinsInScene.Count == 0) GameSession.Instance.ComliteLevel(true, player.CountCatchedCoins);
+                    if (coinsInScene.Count == 0) GameSession.Instance.ComliteLevel(true);
                 };
                 coinsInScene.Add(newObj);
             }

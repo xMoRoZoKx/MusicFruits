@@ -8,12 +8,13 @@ using UnityEngine.SceneManagement;
 
 public partial class GameSession : Singleton<GameSession>
 {
-    public const string FIRST_START_KEY = "FIRST_START_KEY"; 
-    public bool IsFirstStart => !PlayerPrefsPro.Get<bool>(FIRST_START_KEY); 
+    public const string FIRST_START_KEY = "FIRST_START_KEY";
+    public bool IsFirstStart => !PlayerPrefsPro.Get<bool>(FIRST_START_KEY);
+    public GamePlayModel gamePlayModel;
     public GameSession()
     {
         Application.targetFrameRate = 60;
-        if(IsFirstStart)
+        if (IsFirstStart)
         {
             FirstStart();
             PlayerPrefsPro.Set(FIRST_START_KEY, true);
@@ -35,17 +36,16 @@ public partial class GameSession : Singleton<GameSession>
     }
     public void StartGame(LevelConfig config)
     {
-        currentLevelConfig = config;
+        gamePlayModel = new GamePlayModel(config);
         LoadScene("GameScene");
     }
-    public void ComliteLevel(bool isWon, int coins = 0)
+    public void ComliteLevel(bool isWon)
     {
-        if (currentLevelConfig == null) return;
-        GameSaves.Instance.Coins.value += coins;
-
+        if (gamePlayModel == null) return;
+        GameSaves.Instance.Coins.value += gamePlayModel.CountCatchedCoins;
 
         LoadMenu();
-        WindowManager.instance.Show<StartGameScreen>().Show(currentLevelConfig);
-        currentLevelConfig = null;
+        WindowManager.instance.Show<StartGameScreen>().Show(gamePlayModel.levelConfig);
+        gamePlayModel = null;
     }
 }

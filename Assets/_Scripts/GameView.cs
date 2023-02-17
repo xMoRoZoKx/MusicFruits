@@ -13,22 +13,24 @@ public partial class GameView : MonoBehaviour
     [SerializeField] private Camera currentCamera;
     [SerializeField] private BaseAnimationBG animationBG;
     private AudioSource source;
-    private LevelConfig currentConfig;
-    private List<long> timeKeys;
     private float cameraDistance = 15;
     private ParticleSystem particle;
     public Vector2 defaultCursorPosition => Vector2.zero;
-    private PlayerInstance player;
     private Reactive<float> progress = new Reactive<float>();
     private bool isPause;
     private bool isLevelComplete;
+    private GamePlayModel model => GameSession.Instance.gamePlayModel;
+    private LevelConfig currentConfig => model.levelConfig;
+    private List<long> timeKeys => model.timeKeys;
+    private PlayerInstance player => model.player;
     public float GetOffsetInSeconds(Vector3 positionTo)
     {
         return Mathf.Abs(spawnPoint.y - positionTo.y) / configSpeed;
     }
     private void Start()
     {
-        Init(GameSession.Instance.currentLevelConfig);
+        if (model == null) GameSession.Instance.LoadMenu();
+        Init();
 
         StartCoroutine(StartGame());
     }
@@ -48,9 +50,8 @@ public partial class GameView : MonoBehaviour
             isLevelComplete = true;
         });
     }
-    public void Init(LevelConfig config)
+    public void Init()
     {
-        player = new PlayerInstance();
         player.OnDead = () =>
         {
             WindowManager.instance.Show<LosingGameScreen>().Show(
@@ -66,15 +67,11 @@ public partial class GameView : MonoBehaviour
             Pause(true);
         };
 
-        currentConfig = config;
-
         spawnPoint = currentCamera.ScreenToWorldPoint(spawnScreenPoint);
         downPoint = currentCamera.ScreenToWorldPoint(downScreenPoint);
 
         startOffset = GetOffsetInSeconds(downPoint);
-        speed = configSpeed;
-        timeKeys = config.GetTimes().timeKeysMilliseconds;
-        particle = Instantiate(config.particle, downPoint, Quaternion.identity);
+        particle = Instantiate(currentConfig.particle, downPoint, Quaternion.identity);
 
         WindowManager.instance.Show<GameHUDScreen>().Show(player.Hp, progress);
     }
@@ -121,25 +118,4 @@ public partial class GameView : MonoBehaviour
         if (source == null) return;
         progress.value = source.time / timeKeys[timeKeys.Count - 1].MillisecondsToSeconds();
     }
-}
-public class PlayerInstance
-{
-    public Reactive<int> Hp { get; private set; } = new Reactive<int>(3);
-    public int CountCatchedCoins;
-    public bool IsDead => Hp.value <= 0;
-    public bool HaveShield;
-    public void Damage(int damageCount)
-    {
-        if (HaveShield) return;
-        Hp.value -= damageCount;
-        if (Hp.value <= 0)
-        {
-            OnDead?.Invoke();
-        }
-    }
-    public void Resurrect()
-    {
-        Hp.value = 3;
-    }
-    public Action OnDead;
 }

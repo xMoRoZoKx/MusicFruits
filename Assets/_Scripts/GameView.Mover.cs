@@ -6,9 +6,14 @@ using UnityEngine;
 public partial class GameView
 {
 
-    private const float coinsSpeed = 7, obstaclesSpeed = 5;
-    private float configSpeed => currentConfig != null ? currentConfig.fallSpeed : 10;
-    private float speed = 1;
+    private float coinsSpeed => model.coinsSpeed;
+    private float obstaclesSpeed => model.obstaclesSpeed;
+    private float configSpeed => model.configSpeed;
+    private float currentSpeed
+    {
+        get { return model.currentFallSpeed; }
+        set { model.currentFallSpeed = value; }
+    }
     public void MoveCursor(Vector3 touchPos)
     {
         if (Input.touchCount != 0)
@@ -29,7 +34,7 @@ public partial class GameView
     {
         for (int i = 0; i < musicObjectsInScene.Count; i++)
         {
-            musicObjectsInScene[i].transform.Move(0, -speed * Time.fixedDeltaTime, 0);
+            musicObjectsInScene[i].transform.Move(0, -currentSpeed * Time.fixedDeltaTime, 0);
             if (musicObjectsInScene[i].transform.position.y < downPoint.y)
             {
                 Destroy(musicObjectsInScene[i].gameObject);
@@ -54,6 +59,6 @@ public partial class GameView
     }
     public void CalculateSpeed(Vector3 touchPos)
     {
-        speed = configSpeed * (GetOffsetInSeconds(touchPos) / startOffset);
+        currentSpeed = configSpeed * (GetOffsetInSeconds(touchPos) / startOffset);
     }
 }
