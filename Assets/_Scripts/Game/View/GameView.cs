@@ -12,17 +12,17 @@ public partial class GameView : MonoBehaviour
 {
     [SerializeField] private Camera currentCamera;
     [SerializeField] private BaseAnimationBG animationBG;
-    private AudioSource source;
-    private float cameraDistance = 15;
-    private ParticleSystem particle;
-    public Vector2 defaultCursorPosition => Vector2.zero;
-    private Reactive<float> progress = new Reactive<float>();
-    private bool isPause;
-    private bool isLevelComplete;
     private GamePlayModel model => GameSession.Instance.gamePlayModel;
     private LevelConfig currentConfig => model.levelConfig;
+    private Reactive<float> progress => model.progress;
     private List<long> timeKeys => model.timeKeys;
     private PlayerInstance player => model.player;
+    private AudioSource source;
+    private ParticleSystem particle;
+    public Vector2 defaultCursorPosition => Vector2.zero;
+    private float cameraDistance = 15;
+    private bool isPause;
+    private bool isLevelComplete;
     public float GetOffsetInSeconds(Vector3 positionTo)
     {
         return Mathf.Abs(spawnPoint.y - positionTo.y) / configSpeed;

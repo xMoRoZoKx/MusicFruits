@@ -10,7 +10,7 @@ public class MenuViewWindow : WindowBase
 {
     [SerializeField] private LevelConfigView levelViewPrefab;
     [SerializeField] private RectTransform container;
-    [SerializeField] private TextMeshProUGUI coinsCounter;
+    [SerializeField] private TextMeshProUGUI coinsCounter, starsCounter;
     private void Start()
     {
         Show();
@@ -29,6 +29,10 @@ public class MenuViewWindow : WindowBase
         {
             coinsCounter.text = value.ToString();
         });
-
+        
+        GameSaves.Instance.Stars.SubscribeAndInvoke(value => 
+        {
+            starsCounter.text = value.ToString();
+        });
     }
 }

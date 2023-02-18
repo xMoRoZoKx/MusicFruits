@@ -43,9 +43,23 @@ public partial class GameSession : Singleton<GameSession>
     {
         if (gamePlayModel == null) return;
         GameSaves.Instance.Coins.value += gamePlayModel.CountCatchedCoins;
-
+        UpdateRecord(gamePlayModel.levelConfig, gamePlayModel.progress.value * 100);
         LoadMenu();
         WindowManager.instance.Show<StartGameScreen>().Show(gamePlayModel.levelConfig);
         gamePlayModel = null;
+    }
+    private void UpdateRecord(LevelConfig config, float progressInPercent)
+    {
+        foreach (var starPercent in config.starPlacesInPercent)
+        {
+            if (config.GetRecord() < starPercent && progressInPercent > starPercent)
+            {
+                GameSaves.Instance.Stars.value++;
+            }
+        }
+        if (progressInPercent > config.GetRecord())
+        {
+            config.SetRecord(progressInPercent);
+        }
     }
 }

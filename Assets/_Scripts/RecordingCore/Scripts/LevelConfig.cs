@@ -7,6 +7,7 @@ public class LevelConfig : ScriptableObject
 {
     public string levelName => name;
     public string timeKeysJson;
+    public int[] starPlacesInPercent = { 30, 70, 100 };
     public AudioClip clip;
     public Sprite icon;
     public int fallSpeed = 10;

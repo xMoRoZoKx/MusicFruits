@@ -12,9 +12,11 @@ public class GamePlayModel
         player = new PlayerInstance();
         timeKeys = levelConfig.GetTimes().timeKeysMilliseconds;
         currentFallSpeed = coinsSpeed;
+        progress = new Reactive<float>();
     }
     public PlayerInstance player { get; private set; }
     public LevelConfig levelConfig { get; private set; }
+    public Reactive<float> progress;
     public List<long> timeKeys { get; private set; }
     public float coinsSpeed => 7;
     public float obstaclesSpeed => 5;
