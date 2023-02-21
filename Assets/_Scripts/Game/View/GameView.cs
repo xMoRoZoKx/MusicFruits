@@ -78,7 +78,7 @@ public partial class GameView : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isPause) return;
+        if (isPause || model == null) return;
         Vector3 touchPos = GetTouchWorldPosition();
         CalculateProgress();
         CalculateSpeed(touchPos);

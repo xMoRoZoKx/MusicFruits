@@ -16,11 +16,11 @@ public partial class GameView
     private List<MusicObject> obstaclesInScene = new List<MusicObject>();
     private List<MusicObject> coinsInScene = new List<MusicObject>();
     private float startOffset = 0;
-    private TaskWaiting spawnTaskAwaiter;
+    private TaskController spawnTaskAwaiter;
     private async void SpawnWithRhythm(LevelConfig config)
     {
         long difference = 0;
-        spawnTaskAwaiter = new TaskWaiting();
+        spawnTaskAwaiter = new TaskController();
         for (int i = 1; i < config.GetTimes().timeKeysMilliseconds.Count - 1; i++)
         {
             var currentkey = source == null ? timeKeys[i] : source.time.SecondsToMilliseconds();
