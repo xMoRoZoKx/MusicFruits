@@ -5,11 +5,12 @@ using TMPro;
 using Tools;
 using UITools;
 using UnityEngine;
+using DG.Tweening;
 
 public class MenuViewWindow : WindowBase
 {
     [SerializeField] private LevelConfigView levelViewPrefab;
-    [SerializeField] private RectTransform container;
+    [SerializeField] private RectTransform menuScreen, viewContainer, container;
     [SerializeField] private TextMeshProUGUI coinsCounter, starsCounter;
     private void Start()
     {
@@ -17,14 +18,7 @@ public class MenuViewWindow : WindowBase
     }
     public void Show()
     {
-        GameConfigs.Instance.AllLevels.Present(levelViewPrefab, container, (view, config) =>
-        {
-            view.Show(config, onClick: () =>
-            {
-                // WindowManager.instance.Show<StartGameScreen>().Show(config);
-                GameSession.Instance.StartGame(config);
-            });
-        });
+        menuScreen.DOAnchorPos(new Vector2(0, 0), 0.35f);
         GameSaves.Instance.Coins.SubscribeAndInvoke(value => 
         {
             coinsCounter.text = value.ToString();
@@ -34,5 +28,24 @@ public class MenuViewWindow : WindowBase
         {
             starsCounter.text = value.ToString();
         });
+    }
+    public void ShowLevels()
+    {
+        menuScreen.DOAnchorPos(new Vector2(-1000, 0), 0.35f);
+        viewContainer.DOAnchorPos(new Vector2(0, 0), 0.35f);
+
+        GameConfigs.Instance.AllLevels.Present(levelViewPrefab, container, (view, config) =>
+        {
+            view.Show(config, onClick: () =>
+            {
+                // WindowManager.instance.Show<StartGameScreen>().Show(config);
+                GameSession.Instance.StartGame(config);
+            });
+        });
+    }
+    public void ShowMenu()
+    {
+        menuScreen.DOAnchorPos(new Vector2(-1000, 0), 0.35f);
+        viewContainer.DOAnchorPos(new Vector2(0, 0), 0.35f);
     }
 }
