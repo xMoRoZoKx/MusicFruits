@@ -6,7 +6,7 @@ using Tools;
 using UITools;
 using UnityEngine;
 
-public class MenuViewWindow : WindowBase
+public class LevelsScreen : WindowBase
 {
     [SerializeField] private LevelConfigView levelViewPrefab;
     [SerializeField] private RectTransform container;

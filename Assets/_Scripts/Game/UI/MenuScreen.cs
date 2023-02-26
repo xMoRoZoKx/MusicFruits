@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class LevelListScreen : WindowBase
+public class MenuScreen : WindowBase
 {
     [SerializeField] private Button playButton, levelButton;
     [SerializeField] private TextMeshProUGUI coinsCounter, starsCounter;
@@ -16,7 +16,7 @@ public class LevelListScreen : WindowBase
     public void Show(LevelConfig config)
     {
         playButton.OnClick(() => GameSession.Instance.StartGame(config));
-        levelButton.OnClick(() => WindowManager.instance.Show<MenuViewWindow>().Show());
+        levelButton.OnClick(() => WindowManager.instance.Show<LevelsScreen>().Show());
         GameSaves.Instance.Coins.SubscribeAndInvoke(value =>
         {
             coinsCounter.text = value.ToString();
