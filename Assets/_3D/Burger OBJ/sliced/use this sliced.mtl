@@ -1,0 +1,66 @@
+newmtl Burger
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd use this sliced_Albedo.tga
+map_Ks use this sliced_Gloss.tga
+map_bump use this sliced_Normal.tga
+newmtl Cheese
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd use this sliced_Albedo.tga
+map_Ks use this sliced_Gloss.tga
+map_bump use this sliced_Normal.tga
+newmtl Patty
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd use this sliced_Albedo.tga
+map_Ks use this sliced_Gloss.tga
+map_bump use this sliced_Normal.tga
+newmtl Salad
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd use this sliced_Albedo.tga
+map_Ks use this sliced_Gloss.tga
+map_bump use this sliced_Normal.tga
+newmtl Cucumber
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd use this sliced_Albedo.tga
+map_Ks use this sliced_Gloss.tga
+map_bump use this sliced_Normal.tga
+newmtl Tomato
+Ns 100.000
+d 1.00000
+illum 2
+Kd 1.00000 1.00000 1.00000
+Ka 0.00000 0.00000 0.00000
+Ks 1.00000 1.00000 1.00000
+Ke 0.00000e+0 0.00000e+0 0.00000e+0
+map_Kd use this sliced_Albedo.tga
+map_Ks use this sliced_Gloss.tga
+map_bump use this sliced_Normal.tga
