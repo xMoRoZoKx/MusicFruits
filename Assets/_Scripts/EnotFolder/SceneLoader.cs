@@ -1,8 +1,3 @@
-/*  
-    SQU1KI(ENOT) СОЗДАТЕЛЬ ЭТОЙ ПАРАШИ
-    КОД МОЖНО МЕНЯТЬ ПОД СЕБЯ,   РАЗРЕШАЮ
-*/
-
 #if UNITY_EDITOR
 using System;
 using UnityEditor;
